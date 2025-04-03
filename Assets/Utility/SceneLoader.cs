@@ -8,8 +8,9 @@ namespace Utility
 {
     public class SceneLoader : MonoBehaviour
     {
-        public event Action<float> OnLoadingProgress;
-        public event Action OnLoadingComplete; 
+        public static event Action OnLoadingTeek;
+        public static event Action<float> OnLoadingProgress;
+        public static event Action OnLoadingComplete; 
 
         public void LoadSceneAsync(string sceneName) => StartCoroutine(LoadYourAsyncScene(sceneName));
 
@@ -20,6 +21,7 @@ namespace Utility
             while(asyncLoad.isDone == false)
             {
                 // Передаем прогресс загрузки через событие
+                OnLoadingTeek?.Invoke();
                 OnLoadingProgress?.Invoke(asyncLoad.progress);
                 yield return null;
             }

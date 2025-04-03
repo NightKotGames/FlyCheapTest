@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextScene: 2
+  _loadOnStart: 1
   _loader: {fileID: 1995557613}
 --- !u!114 &1995557613
 MonoBehaviour:

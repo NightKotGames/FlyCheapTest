@@ -8,15 +8,20 @@ namespace EntryPoint
     
     public class LoadingEntryPoint : MonoBehaviour
     {
+        [Header("Options: ")]
         [SerializeField] private SceneType _nextScene;
+        [SerializeField] private bool _loadOnStart;
+        [Space(20)]
+        [Header("Need Components: ")]
         [SerializeField] private SceneLoader _loader;
+
 
         private void Start()
         {
             // Init Services
 
-
-            Loading();
+            if (_loadOnStart == true)
+                Loading();
         }
 
         private void Loading()
