@@ -1483,9 +1483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d51a9784a9f6094c9d010c273a1d518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loader: {fileID: 1995557613}
   _nextScene: 3
   _loadOnStart: 0
-  _loader: {fileID: 1995557613}
 --- !u!114 &1995557613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1510,6 +1510,8 @@ GameObject:
   - component: {fileID: 2091767292}
   - component: {fileID: 2091767291}
   - component: {fileID: 2091767290}
+  - component: {fileID: 2091767294}
+  - component: {fileID: 2091767293}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1619,6 +1621,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091767288}
   m_CullTransparentMesh: 1
+--- !u!114 &2091767293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091767288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7add5a8b6ee494e91222781dc7c749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loader: {fileID: 2091767294}
+  _button: {fileID: 2091767290}
+  _nextScene: 3
+--- !u!114 &2091767294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091767288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7b2cfc23a122d4a999e3dc2f7a98fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
