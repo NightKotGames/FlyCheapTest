@@ -21,5 +21,7 @@ namespace EntryPoint
                     throw new System.Exception("Loading Error!");
             }
         }
+
+        public void LoadingDefault() => Loading(SceneType.Root);
     }
 }

@@ -10,5 +10,7 @@ namespace AirPorts
     {
         [SerializeField] private CountriesType _aitportCountry;
         public CountriesType AitportCountry => _aitportCountry;
+
+        public Vector2 Position;
     }
 }

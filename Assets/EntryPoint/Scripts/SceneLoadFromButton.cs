@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace EntryPoint
 {
-    public class SceneLoadFromButton : EntryPoint
+    public sealed class SceneLoadFromButton : EntryPoint
     {
         [SerializeField] private Button _button;
         [Space(20)]

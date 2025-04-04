@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EntryPoint
 {
-    public class BootEntryPoint : EntryPoint, IInitEntryPoint
+    public sealed class BootEntryPoint : EntryPoint, IInitEntryPoint
     {
         [Header("Options: ")]
         [SerializeField] private SceneType _nextScene;

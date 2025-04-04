@@ -1,9 +1,10 @@
 ﻿
 using UnityEngine;
+using Utility;
 
 namespace EntryPoint
 {    
-    public class LoadingEntryPoint : EntryPoint, IInitEntryPoint
+    public sealed class LoadingEntryPoint : EntryPoint, IInitEntryPoint
     {
         [Header("Options: ")]
         [SerializeField] private SceneType _nextScene;
@@ -12,6 +13,10 @@ namespace EntryPoint
         public void Initialize()
         {
             ///
+
+            var mapDataLoader = Object.FindFirstObjectByType<LoadMapData>();
+            if (mapDataLoader != null)
+                mapDataLoader.InitMapData();
         }
 
         private void Start()
