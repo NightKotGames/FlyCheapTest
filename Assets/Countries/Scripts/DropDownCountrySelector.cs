@@ -2,8 +2,8 @@
 using TMPro;
 using AirPorts;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 namespace Countries
@@ -12,10 +12,7 @@ namespace Countries
     {
         [Header("Need Components: ")]
         [SerializeField] private TMP_Dropdown _countryDropdown;  // Ссылка на Dropdown
-        [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label, задающий размеры
-        [Header("Opyions: ")]
-        [SerializeField] private bool _resizeSelect;
-
+        [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label, задающий размеры        
 
         private const string _dropdownListObjectName = "Dropdown List"; // Имя объекта Dropdown List
         private AirportsDataContainer _dataContainer;
@@ -51,9 +48,36 @@ namespace Countries
         {
             _countryDropdown.ClearOptions();
             _countryDropdown.AddOptions(options);
-
-            Debug.Log($"[DropDownCountrySelector] Dropdown populated with {options.Count} countries.");
+            SetFlags(_dropDownLabelText);
         }
+
+        private void SetFlags(TextMeshProUGUI countryText)
+        {
+            // Проверяем, что текст не пустой
+            if (string.IsNullOrEmpty(countryText.text))
+                return;
+
+            // Получаем компонент CountryFlagViewer, связанный с countryText
+            var flagViewer = countryText.GetComponent<CountryFlagViewer>();
+            if (flagViewer == null)
+            {
+                Debug.LogWarning($"[DropDownCountrySelector] CountryFlagViewer не найден для элемента: {countryText.text}");
+                return;
+            }
+
+            // Ищем соответствующий объект AirPortData по названию страны
+            var airportData = _dataContainer.AirPortDatas.Find(data => data.AitportCountry.ToString() == countryText.text);
+            if (airportData == null)
+            {
+                Debug.LogWarning($"[DropDownCountrySelector] Данные для страны {countryText.text} не найдены.");
+                return;
+            }
+
+            // Устанавливаем изображение флага через CountryFlagViewer
+            flagViewer.SetImage(airportData.CountrySprite);
+            Debug.Log($"[DropDownCountrySelector] Установлен флаг для страны: {countryText.text}");
+        }
+
 
         private void AddDropdownClickListener()
         {
@@ -72,44 +96,38 @@ namespace Countries
 
         private void OnDropdownClicked()
         {
-            Debug.Log("[DropDownCountrySelector] Dropdown clicked, waiting for the list to appear...");
             StartCoroutine(WaitAndAdjustLabels());
         }
 
         private IEnumerator WaitAndAdjustLabels()
         {
-            if(_resizeSelect == false)
-                yield return null;
-
             GameObject dropdownList = null;
 
             // Ждём появления Dropdown List
             while (dropdownList == null)
             {
                 dropdownList = GameObject.Find(_dropdownListObjectName);
-                yield return null; // Ждём следующий кадр
+                yield return null;
             }
-
-            Debug.Log("[DropDownCountrySelector] Dropdown List appeared.");
 
             // Находим все TextMeshProUGUI элементы и меняем их параметры
             var textComponents = dropdownList.GetComponentsInChildren<TextMeshProUGUI>();
             
+
             foreach (var text in textComponents)
             {
-                // Применяем размер шрифта
                 text.fontSize = _dropDownLabelText.fontSize;
 
                 // Настраиваем размеры RectTransform
                 var itemRect = text.GetComponent<RectTransform>();
                 if (itemRect != null)
-                {
                     itemRect.sizeDelta = _dropDownLabelText.rectTransform.sizeDelta;
-                    Debug.Log($"[DropDownCountrySelector] Applied size {itemRect.sizeDelta} to: {text.gameObject.name}");
-                }
 
-                Debug.Log($"[DropDownCountrySelector] Applied font size {text.fontSize} to: {text.gameObject.name}");
+                SetFlags(text);
+                yield return null; // Ждём следующий кадр
             }
+
+            
         }
     }
 }

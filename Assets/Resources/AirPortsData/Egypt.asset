@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Egypt
   m_EditorClassIdentifier: 
   _aitportCountry: 49
+  _countrySpriyte: {fileID: -714406615, guid: b99c37f6556c54d409d340d87853f71b, type: 3}
   Position: {x: 0, y: 0}

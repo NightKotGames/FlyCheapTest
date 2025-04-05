@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: France
   m_EditorClassIdentifier: 
   _aitportCountry: 58
+  _countrySpriyte: {fileID: 5503460646655229670, guid: b99c37f6556c54d409d340d87853f71b, type: 3}
   Position: {x: 0, y: 0}

@@ -11,6 +11,9 @@ namespace AirPorts
         [SerializeField] private CountriesType _aitportCountry;
         public CountriesType AitportCountry => _aitportCountry;
 
+        [SerializeField] private Sprite _countrySpriyte;
+        public Sprite CountrySprite => _countrySpriyte;
+
         public Vector2 Position;
     }
 }
