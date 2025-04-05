@@ -13,6 +13,9 @@ namespace Countries
         [Header("Need Components: ")]
         [SerializeField] private TMP_Dropdown _countryDropdown;  // Ссылка на Dropdown
         [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label, задающий размеры
+        [Header("Opyions: ")]
+        [SerializeField] private bool _resizeSelect;
+
 
         private const string _dropdownListObjectName = "Dropdown List"; // Имя объекта Dropdown List
         private AirportsDataContainer _dataContainer;
@@ -75,6 +78,9 @@ namespace Countries
 
         private IEnumerator WaitAndAdjustLabels()
         {
+            if(_resizeSelect == false)
+                yield return null;
+
             GameObject dropdownList = null;
 
             // Ждём появления Dropdown List
