@@ -1,4 +1,5 @@
 
+using AirPorts;
 using UnityEngine;
 
 namespace EntryPoint
@@ -9,18 +10,26 @@ namespace EntryPoint
         [SerializeField] private SceneType _nextScene;
         [SerializeField] private bool _loadOnStart;
 
+        private bool _initIsSuccessFully;
+
         public void Initialize()
         {
             ///
+
+            if (Object.FindFirstObjectByType<AirportsDataContainer>() == null)
+            {
+                Debug.LogWarning("[MainMenuEntryPoint] AirportsDataContainer not found! Loading default scene...");
+                _initIsSuccessFully = false;
+                LoadingDefault();
+            }
+            else
+                _initIsSuccessFully = true;
         }
 
         private void Start()
         {
             // Init Services
             Initialize();
-
-            if (_loadOnStart == true)
-                Loading(_nextScene);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Countries
     public class DropDownCountrySelector : MonoBehaviour
     {
         [Header("Need Components:")]
-        [SerializeField] private TMP_Dropdown _countryDropdown; // Ссылка на Dropdown
+        [SerializeField] private TMP_Dropdown _countryDropdown;
         [SerializeField] private Image _countryImage; // Ссылка на Image для отображения флага
         [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label для размера шрифта
 
@@ -27,11 +27,7 @@ namespace Countries
                 Debug.LogWarning("AirportsDataContainer не найден!");
                 return;
             }
-
-            // Подписываемся на событие изменения выпадающего списка
             _countryDropdown.onValueChanged.AddListener(UpdateFlag);
-
-            // Генерируем список уникальных стран и заполняем Dropdown
             PopulateDropdown(GetUniqueCountries(_dataContainer));
         }
 
@@ -58,21 +54,16 @@ namespace Countries
 
         private void UpdateFlag(int index)
         {
-            // Получаем название выбранной страны
             string selectedCountry = _countryDropdown.options[index].text;
-
-            // Ищем соответствующий объект AirPortData по названию страны
             var airportData = _dataContainer.AirPortDatas.Find(data => data.AitportCountry.ToString() == selectedCountry);
 
             if (airportData != null)
             {
-                // Устанавливаем изображение флага
                 _countryImage.sprite = airportData.CountrySprite;
                 Debug.Log($"Флаг обновлен для страны: {selectedCountry}");
             }
             else
             {
-                // Если данные для выбранной страны не найдены, сбрасываем изображение
                 Debug.LogWarning($"Не удалось найти данные для страны: {selectedCountry}");
                 _countryImage.sprite = null;
             }
@@ -80,7 +71,6 @@ namespace Countries
 
         private void AdjustDropdownFont()
         {
-            // Проверяем наличие Template -> Item (список опций Dropdown)
             var dropdownTemplate = _countryDropdown.template;
             if (dropdownTemplate == null)
             {
@@ -88,18 +78,13 @@ namespace Countries
                 return;
             }
 
-            // Получаем все элементы списка и приводим их размер шрифта к первоначальному
             var dropdownItems = dropdownTemplate.GetComponentsInChildren<TextMeshProUGUI>(true);
             foreach (var text in dropdownItems)
             {
                 text.fontSize = _dropDownLabelText.fontSize;
-
-                // Настраиваем размеры RectTransform
                 var itemRect = text.GetComponent<RectTransform>();
                 if (itemRect != null)
-                {
                     itemRect.sizeDelta = _dropDownLabelText.rectTransform.sizeDelta;
-                }
             }
         }
     }

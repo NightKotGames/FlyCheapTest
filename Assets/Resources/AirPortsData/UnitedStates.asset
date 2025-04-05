@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aitportCountry: 183
   _countrySpriyte: {fileID: 770357051, guid: b99c37f6556c54d409d340d87853f71b, type: 3}
-  Position: {x: 0, y: 0}
+  Position: {x: -2415, y: 371}
