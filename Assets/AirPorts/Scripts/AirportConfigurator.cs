@@ -9,7 +9,7 @@ namespace AirPorts
         [Header("Map Settings")]
         [SerializeField] private RectTransform _mapRectTransform;
         
-        [Tooltip("Redactor Only!")]
+        [Tooltip("Editor Only!")]
         [Button("Configure Airports")]
         public void ConfigureAirports()
         {

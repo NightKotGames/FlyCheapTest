@@ -2,20 +2,20 @@
 using TMPro;
 using AirPorts;
 using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 namespace Countries
 {
     public class DropDownCountrySelector : MonoBehaviour
     {
-        [Header("Need Components: ")]
-        [SerializeField] private TMP_Dropdown _countryDropdown;  // Ссылка на Dropdown
-        [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label, задающий размеры        
+        [Header("Need Components:")]
+        [SerializeField] private TMP_Dropdown _countryDropdown; // Ссылка на Dropdown
+        [SerializeField] private Image _countryImage; // Ссылка на Image для отображения флага
+        [SerializeField] private TextMeshProUGUI _dropDownLabelText; // Оригинальный Label для размера шрифта
 
-        private const string _dropdownListObjectName = "Dropdown List"; // Имя объекта Dropdown List
         private AirportsDataContainer _dataContainer;
+        private List<TMP_Dropdown.OptionData> _dropDownMenuDatas = new();
 
         private void Start()
         {
@@ -23,111 +23,84 @@ namespace Countries
             _dataContainer = Object.FindFirstObjectByType<AirportsDataContainer>();
 
             if (_dataContainer == null)
+            {
+                Debug.LogWarning("AirportsDataContainer не найден!");
                 return;
+            }
 
-            // Добавляем EventTrigger к Dropdown для отслеживания нажатий
-            AddDropdownClickListener();
+            // Подписываемся на событие изменения выпадающего списка
+            _countryDropdown.onValueChanged.AddListener(UpdateFlag);
 
-            // Генерируем уникальные страны и заполняем Dropdown
-            List<string> countries = GetUniqueCountries(_dataContainer);
-            PopulateDropdown(countries);
+            // Генерируем список уникальных стран и заполняем Dropdown
+            PopulateDropdown(GetUniqueCountries(_dataContainer));
         }
 
-        private List<string> GetUniqueCountries(AirportsDataContainer dataContainer)
-        {
-            HashSet<string> countries = new HashSet<string>();
+        private List<TMP_Dropdown.OptionData> GetUniqueCountries(AirportsDataContainer dataContainer)
+        {            
             foreach (var airportData in dataContainer.AirPortDatas)
             {
                 if (string.IsNullOrEmpty(airportData.AitportCountry.ToString()) == false)
-                    countries.Add(airportData.AitportCountry.ToString());
+                    _dropDownMenuDatas.Add(new TMP_Dropdown.OptionData(airportData.AitportCountry.ToString(),                        airportData.CountrySprite, Color.white));
             }
-            return new List<string>(countries);
+            return _dropDownMenuDatas;
         }
 
-        private void PopulateDropdown(List<string> options)
+        private void PopulateDropdown(List<TMP_Dropdown.OptionData> options)
         {
             _countryDropdown.ClearOptions();
             _countryDropdown.AddOptions(options);
-            SetFlags(_dropDownLabelText);
+
+            // Убедимся, что флаг обновляется для первоначально выбранного варианта
+            UpdateFlag(_countryDropdown.value);
+            AdjustDropdownFont();
         }
 
-        private void SetFlags(TextMeshProUGUI countryText)
-        {
-            // Проверяем, что текст не пустой
-            if (string.IsNullOrEmpty(countryText.text))
-                return;
 
-            // Получаем компонент CountryFlagViewer, связанный с countryText
-            var flagViewer = countryText.GetComponent<CountryFlagViewer>();
-            if (flagViewer == null)
-            {
-                Debug.LogWarning($"[DropDownCountrySelector] CountryFlagViewer не найден для элемента: {countryText.text}");
-                return;
-            }
+        private void UpdateFlag(int index)
+        {
+            // Получаем название выбранной страны
+            string selectedCountry = _countryDropdown.options[index].text;
 
             // Ищем соответствующий объект AirPortData по названию страны
-            var airportData = _dataContainer.AirPortDatas.Find(data => data.AitportCountry.ToString() == countryText.text);
-            if (airportData == null)
+            var airportData = _dataContainer.AirPortDatas.Find(data => data.AitportCountry.ToString() == selectedCountry);
+
+            if (airportData != null)
             {
-                Debug.LogWarning($"[DropDownCountrySelector] Данные для страны {countryText.text} не найдены.");
+                // Устанавливаем изображение флага
+                _countryImage.sprite = airportData.CountrySprite;
+                Debug.Log($"Флаг обновлен для страны: {selectedCountry}");
+            }
+            else
+            {
+                // Если данные для выбранной страны не найдены, сбрасываем изображение
+                Debug.LogWarning($"Не удалось найти данные для страны: {selectedCountry}");
+                _countryImage.sprite = null;
+            }
+        }
+
+        private void AdjustDropdownFont()
+        {
+            // Проверяем наличие Template -> Item (список опций Dropdown)
+            var dropdownTemplate = _countryDropdown.template;
+            if (dropdownTemplate == null)
+            {
+                Debug.LogWarning("Шаблон Dropdown не найден!");
                 return;
             }
 
-            // Устанавливаем изображение флага через CountryFlagViewer
-            flagViewer.SetImage(airportData.CountrySprite);
-            Debug.Log($"[DropDownCountrySelector] Установлен флаг для страны: {countryText.text}");
-        }
-
-
-        private void AddDropdownClickListener()
-        {
-            var trigger = _countryDropdown.gameObject.GetComponent<EventTrigger>();
-            if (trigger == null)
-                trigger = _countryDropdown.gameObject.AddComponent<EventTrigger>();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry
-            {
-                eventID = EventTriggerType.PointerClick
-            };
-
-            entry.callback.AddListener((eventData) => { OnDropdownClicked(); });
-            trigger.triggers.Add(entry);
-        }
-
-        private void OnDropdownClicked()
-        {
-            StartCoroutine(WaitAndAdjustLabels());
-        }
-
-        private IEnumerator WaitAndAdjustLabels()
-        {
-            GameObject dropdownList = null;
-
-            // Ждём появления Dropdown List
-            while (dropdownList == null)
-            {
-                dropdownList = GameObject.Find(_dropdownListObjectName);
-                yield return null;
-            }
-
-            // Находим все TextMeshProUGUI элементы и меняем их параметры
-            var textComponents = dropdownList.GetComponentsInChildren<TextMeshProUGUI>();
-            
-
-            foreach (var text in textComponents)
+            // Получаем все элементы списка и приводим их размер шрифта к первоначальному
+            var dropdownItems = dropdownTemplate.GetComponentsInChildren<TextMeshProUGUI>(true);
+            foreach (var text in dropdownItems)
             {
                 text.fontSize = _dropDownLabelText.fontSize;
 
                 // Настраиваем размеры RectTransform
                 var itemRect = text.GetComponent<RectTransform>();
                 if (itemRect != null)
+                {
                     itemRect.sizeDelta = _dropDownLabelText.rectTransform.sizeDelta;
-
-                SetFlags(text);
-                yield return null; // Ждём следующий кадр
+                }
             }
-
-            
         }
     }
 }
