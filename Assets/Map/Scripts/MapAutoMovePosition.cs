@@ -1,4 +1,5 @@
 ﻿
+using System;
 using AirPorts;
 using Countries;
 using DG.Tweening;
@@ -8,14 +9,17 @@ namespace Map
 {
     public class MapAutoMovePosition : MonoBehaviour
     {
-        [SerializeField] private RectTransform _mapRectTransform; 
-        [SerializeField] private float _moveDuration = 10f; 
+        [SerializeField] private RectTransform _mapRectTransform;
+        [SerializeField] private float _moveDuration = 10f;
+
+        // Экшен для управления вводом
+        public static event Action<bool> OnMapDragToggle;
 
         private AirportsDataContainer _dataContainer;
 
         private void Start()
         {
-            _dataContainer = Object.FindFirstObjectByType<AirportsDataContainer>();
+            _dataContainer = UnityEngine.Object.FindFirstObjectByType<AirportsDataContainer>();
 
             if (_dataContainer == null)
             {
@@ -44,7 +48,13 @@ namespace Map
         private void MoveMapToPosition(Vector2 position)
         {
             if (_mapRectTransform != null)
-                _mapRectTransform.DOAnchorPos(-position, _moveDuration).SetEase(Ease.InOutQuad);
+            {
+                OnMapDragToggle?.Invoke(false);
+
+                _mapRectTransform.DOAnchorPos(-position, _moveDuration)
+                    .SetEase(Ease.InOutQuad)
+                    .OnComplete(() => OnMapDragToggle?.Invoke(true));
+            }
             else
                 Debug.LogWarning("RectTransform карты не найден.");
         }
