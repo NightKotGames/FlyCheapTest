@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 280374613}
   - component: {fileID: 280374612}
   - component: {fileID: 280374614}
+  - component: {fileID: 280374615}
+  - component: {fileID: 280374616}
   m_Layer: 5
   m_Name: MapMask
   m_TagString: Untagged
@@ -209,6 +211,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &280374615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280374610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543515f021f328b4b9cb207e24ebd282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _runButton: {fileID: 1689883702}
+  _activatePanels: []
+  _deActivatePanels:
+  - {fileID: 964097581}
+  _enableComponents: []
+  _disableComponents:
+  - {fileID: 280374614}
+  _description: "\u041E\u0442\u043A\u043B\u044E\u0447\u0430\u0435\u043C \u041F\u0430\u043D\u0435\u043B\u044C
+    \u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438
+    \u041C\u0430\u0441\u043A\u0443."
+--- !u!114 &280374616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280374610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543515f021f328b4b9cb207e24ebd282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _runButton: {fileID: 2091767290}
+  _activatePanels:
+  - {fileID: 964097581}
+  _deActivatePanels: []
+  _enableComponents:
+  - {fileID: 280374614}
+  _disableComponents: []
+  _description: "\u0412\u043A\u043B\u044E\u0447\u0430\u0435\u043C  \u041F\u0430\u043D\u0435\u043B\u044C
+    \u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438
+    \u041C\u0430\u0441\u043A\u0443."
 --- !u!1 &419403445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,9 +1584,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2091767289}
   - {fileID: 280374611}
   - {fileID: 964097581}
+  - {fileID: 2091767289}
   m_Father: {fileID: 1324171520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1841,8 +1887,6 @@ GameObject:
   - component: {fileID: 2091767292}
   - component: {fileID: 2091767291}
   - component: {fileID: 2091767290}
-  - component: {fileID: 2091767294}
-  - component: {fileID: 2091767293}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1952,33 +1996,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091767288}
   m_CullTransparentMesh: 1
---- !u!114 &2091767293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091767288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7add5a8b6ee494e91222781dc7c749, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loader: {fileID: 2091767294}
-  _button: {fileID: 2091767290}
-  _nextScene: 3
---- !u!114 &2091767294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091767288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f7b2cfc23a122d4a999e3dc2f7a98fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &773484807372237
 CanvasRenderer:
   m_ObjectHideFlags: 0
