@@ -10,6 +10,6 @@ namespace AirPorts
 
         public Vector2 Position { get; private set; }
 
-        private void Awake() => Position = gameObject.transform.position;
+        private void Awake() => Position = _portData.Position;
     }
 }
