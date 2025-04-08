@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using UnityEngine;
 
 namespace Map
@@ -23,7 +23,7 @@ namespace Map
             if(_dragPemission == false)
                 return;
 
-            if (Input.touchCount == 1) // Одно касание
+            if (Input.touchCount == 1) 
             {
                 Touch touch = Input.GetTouch(0);
 

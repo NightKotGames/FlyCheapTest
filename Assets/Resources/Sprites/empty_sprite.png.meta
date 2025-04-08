@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 5dc53ae3887adc843953291bf61362d1
+guid: 0c1e12ab010d9294bb4e3d41e9574544
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 636997873994981336
-    second: ProgrammSceneSprites_0
-  - first:
-      213: -1966608061777245785
-    second: ProgrammSceneSprites_1
-  - first:
-      213: -5597533790576775019
-    second: ProgrammSceneSprites_2
-  - first:
-      213: -768525449342678320
-    second: ProgrammSceneSprites_3
-  - first:
-      213: 912880917618160524
-    second: ProgrammSceneSprites_4
+      213: 1935524835104813287
+    second: empty_sprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -138,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ProgrammSceneSprites_0
+      name: empty_sprite_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 810
-        width: 1441
-        height: 1358
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8df5622013217d800800000000000000
-      internalID: 636997873994981336
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProgrammSceneSprites_1
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 635
-        width: 1222
-        height: 156
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7a90959236435b4e0800000000000000
-      internalID: -1966608061777245785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProgrammSceneSprites_2
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 436
-        width: 152
-        height: 152
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 590fc6aaca09152b0800000000000000
-      internalID: -5597533790576775019
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProgrammSceneSprites_3
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 461
-        width: 102
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0da0517fc26a555f0800000000000000
-      internalID: -768525449342678320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProgrammSceneSprites_4
-      rect:
-        serializedVersion: 2
-        x: 1164
-        y: 275
-        width: 277
-        height: 277
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c83fcd0ab543bac00800000000000000
-      internalID: 912880917618160524
+      spriteID: 7e07e5a259d5cda10800000000000000
+      internalID: 1935524835104813287
       vertices: []
       indices: 
       edges: []
@@ -251,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -261,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ProgrammSceneSprites_0: 636997873994981336
-      ProgrammSceneSprites_1: -1966608061777245785
-      ProgrammSceneSprites_2: -5597533790576775019
-      ProgrammSceneSprites_3: -768525449342678320
-      ProgrammSceneSprites_4: 912880917618160524
+      empty_sprite_0: 1935524835104813287
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
