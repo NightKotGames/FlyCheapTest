@@ -19,7 +19,6 @@ namespace Countries
 
         private void Start()
         {
-            // Находим AirportsDataContainer
             _dataContainer = Object.FindFirstObjectByType<AirportsDataContainer>();
 
             if (_dataContainer == null)
@@ -32,11 +31,15 @@ namespace Countries
         }
 
         private List<TMP_Dropdown.OptionData> GetUniqueCountries(AirportsDataContainer dataContainer)
-        {            
+        {
             foreach (var airportData in dataContainer.AirPortDatas)
             {
                 if (string.IsNullOrEmpty(airportData.AitportCountry.ToString()) == false)
-                    _dropDownMenuDatas.Add(new TMP_Dropdown.OptionData(airportData.AitportCountry.ToString(),                        airportData.CountrySprite, Color.white));
+                    _dropDownMenuDatas.Add(new TMP_Dropdown.OptionData(
+                        airportData.AitportCountry.ToString(),
+                        airportData.CountrySprite,
+                        Color.white
+                    ));
             }
             return _dropDownMenuDatas;
         }
@@ -46,11 +49,9 @@ namespace Countries
             _countryDropdown.ClearOptions();
             _countryDropdown.AddOptions(options);
 
-            // Убедимся, что флаг обновляется для первоначально выбранного варианта
             UpdateFlag(_countryDropdown.value);
             AdjustDropdownFont();
         }
-
 
         private void UpdateFlag(int index)
         {

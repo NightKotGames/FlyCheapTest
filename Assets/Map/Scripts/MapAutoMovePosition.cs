@@ -10,7 +10,7 @@ namespace Map
     public class MapAutoMovePosition : MonoBehaviour
     {
         [SerializeField] private RectTransform _mapRectTransform;
-        [SerializeField] private float _moveDuration = 10f;
+        [SerializeField] private float _moveTime = 5f;
 
         // Экшен для управления вводом
         public static event Action<bool> OnMapDragToggle;
@@ -51,7 +51,7 @@ namespace Map
             {
                 OnMapDragToggle?.Invoke(false);
 
-                _mapRectTransform.DOAnchorPos(-position, _moveDuration)
+                _mapRectTransform.DOAnchorPos(-position, _moveTime)
                     .SetEase(Ease.InOutQuad)
                     .OnComplete(() => OnMapDragToggle?.Invoke(true));
             }
